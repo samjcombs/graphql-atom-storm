@@ -1,2 +1,3 @@
-# graphql-atom-storm
-Brainstorming GraphQL Patterns for Design System Atoms 
+# GraphQL Atom Storm
+
+Brainstorm repo to design GraphQL schema patterns for atomic design system componentsBrainstorm repo to design GraphQL schema patterns for atomic design system components. 

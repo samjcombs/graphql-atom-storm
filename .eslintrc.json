@@ -1,0 +1,43 @@
+{
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "processor": "@graphql-eslint/graphql",
+      "extends": ["plugin:prettier/recommended"]
+    },
+    {
+      "files": ["*.graphql"],
+      "parser": "@graphql-eslint/eslint-plugin",
+      "plugins": ["@graphql-eslint"],
+      "rules": {
+        "prettier/prettier": "error",
+        "@graphql-eslint/description-style": "warn",
+        "@graphql-eslint/known-argument-names": "warn",
+        "@graphql-eslint/known-directives": "warn",
+        "@graphql-eslint/known-type-names": "warn",
+        "@graphql-eslint/lone-schema-definition": "warn",
+        "@graphql-eslint/no-hashtag-description": "warn",
+        "@graphql-eslint/no-typename-prefix": "warn",
+        "@graphql-eslint/no-unreachable-types": "warn",
+        "@graphql-eslint/possible-type-extension": "warn",
+        "@graphql-eslint/provided-required-arguments": "warn",
+        "@graphql-eslint/require-deprecation-reason": "warn",
+        "@graphql-eslint/require-description": [
+          "info",
+          {
+            "types": true,
+            "DirectiveDefinition": true,
+            "rootField": true
+          }
+        ],
+        "@graphql-eslint/strict-id-in-types": "warn",
+        "@graphql-eslint/unique-directive-names": "warn",
+        "@graphql-eslint/unique-directive-names-per-location": "warn",
+        "@graphql-eslint/unique-enum-value-names": "error",
+        "@graphql-eslint/unique-field-definition-names": "warn",
+        "@graphql-eslint/unique-operation-types": "warn",
+        "@graphql-eslint/unique-type-names": "warn"
+      }
+    }
+  ]
+}

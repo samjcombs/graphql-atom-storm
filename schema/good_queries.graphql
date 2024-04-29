@@ -1,0 +1,81 @@
+fragment Heading on UIHeading {
+  text
+  ariaLabel
+}
+
+fragment Rating on UIRating {
+  rating
+  ariaLabel
+}
+
+fragment Icon on UIIcon {
+  name
+  text
+  ariaLabel
+  ariaHidden
+  altText
+  accessKey
+}
+
+fragment Map on UIMap {
+  center
+  address
+  ariaLabel
+  ariaLive
+  lang
+}
+
+fragment IconTextGroup on UIIconTextGroup {
+  title
+  icons {
+    ...Icon
+  }
+  ariaLabelledBy
+  ariaDescribedBy
+}
+
+fragment ReviewsSummary on UIReviewsSummary {
+  averageRating {
+    ...Rating
+  }
+  ratingWord
+  reviewQuantity
+  ariaLabel
+  ariaLive
+}
+
+fragment ProductOverview on UIProductOverview {
+  productID
+  heading {
+    ...Heading
+  }
+  rating {
+    ...Rating
+  }
+  summary
+  reviewsSummary {
+    ...ReviewsSummary
+  }
+  productFeaturesIconGroup {
+    ...IconTextGroup
+  }
+  map {
+    ...Map
+  }
+  similarLocationsIconGroup {
+    ...IconTextGroup
+  }
+}
+
+query GetProductOverview($productID: ID!) {
+  productOverviewExperience(productID: $productID) {
+    ... on UIProductOverview {
+      ...ProductOverview
+    }
+    ... on UIError {
+      message
+      code
+      ariaLabel
+    }
+  }
+}

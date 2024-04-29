@@ -1,0 +1,55 @@
+type Query {
+  hotelInfo(id: ID!): HotelInfo
+  vacationPackage(id: ID!): VacationPackage
+  adventureActivity(id: ID!): AdventureActivity
+}
+
+type Amenity {
+  icon: String
+  description: String
+}
+
+type Location {
+  fullAddress: String
+  attractionsNearby: [String]
+  mapLink: String
+}
+
+type HotelInfo {
+  id: ID!
+  name: String
+  guestRating: Float
+  numberOfReviews: Int
+  isRefundable: Boolean
+  amenities: [Amenity]
+  location: Location
+}
+
+type VacationPackage {
+  id: ID!
+  name: String
+  rating: Float
+  totalReviews: Int
+  canBeRefunded: Boolean
+  includedAmenities: [Amenity]
+  location: Location
+}
+
+type Feature {
+  policy: String
+  timeLength: Int
+  supportsMobileVoucher: Boolean
+  providesInstantConfirmation: Boolean
+}
+
+type AdventureActivity {
+  id: ID!
+  title: String
+  rating: Float
+  reviewCount: Int
+  price: Float
+  allowsRefunds: Boolean
+  features: Feature
+  details: String
+  spot: Location
+}

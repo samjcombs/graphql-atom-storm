@@ -1,0 +1,148 @@
+# Product Experience Service
+
+"""
+Experience queries
+"""
+type Query {
+  """
+  Product Overview Experience Query
+
+  Returns either a Product Overview or a UI Error state
+  """
+  productOverviewExperience(productID: ID!): ProductOverviewResult!
+}
+
+#   Atomic Component Library
+
+"""
+Geospatial Coordinate
+"""
+scalar LatLng
+
+"""
+Atomic Component: Heading
+
+Defines a UI heading component, which includes essential text to be
+displayed.  Accessibility features are included to assist screen readers.
+"""
+type UIHeading {
+  id: ID!
+  text: String!
+  ariaLabel: String
+}
+
+"""
+Atomic Component: Rating
+
+Represents a UI component that displays a numerical rating, such as product
+or service quality, on a predefined scale.  Includes accessibility
+enhancements.
+"""
+type UIRating {
+  id: ID!
+  rating: Float!
+  ariaLabel: String
+}
+
+"""
+Atomic Component: Icon
+
+Represents a UI icon component, optionally accompanied by text, used to
+visually represent features or actions.  Includes accessibility
+enhancements.
+"""
+type UIIcon {
+  id: ID!
+  name: String!
+  text: String
+  ariaLabel: String
+  ariaHidden: Boolean
+  altText: String
+  accessKey: String
+}
+
+"""
+Atomic Component: Map
+
+Defines a UI map component centered on specified geospatial coordinates,
+including an address label.  Enhanced with accessibility features for better
+usability.
+"""
+type UIMap {
+  center: LatLng!
+  address: String!
+  ariaLabel: String
+  ariaLive: String
+  lang: String
+}
+
+"""
+Pattern Sub-Component: Icon + Text Group
+
+A composite UI component that groups multiple icons with a common title,
+enhancing the thematic coherence of the UI elements.  Accessibility fields
+added to support better interaction for all users.
+"""
+type UIIconTextGroup {
+  id: ID!
+  title: String!
+  icons: [UIIcon!]!
+  ariaLabelledBy: String
+  ariaDescribedBy: String
+}
+
+"""
+Pattern Sub-Component: Reviews Summary
+
+Summarizes reviews by displaying an average rating and a qualitative
+assessment word, accompanied by the total number of reviews. Includes
+detailed accessibility fields to enhance usability for all users.
+"""
+type UIReviewsSummary {
+  averageRating: UIRating!
+  ratingWord: String!
+  reviewQuantity: Int!
+  ariaLabel: String
+  ariaLive: String
+}
+
+"""
+Pattern Component: Product Overview
+
+A comprehensive UI component representing a product overview. It includes a
+heading, a rating summary, and various sub-components that provide detailed
+information about the product and related features. This component integrates
+various pattern sub-components and atomic elements to form a cohesive user
+experience, with accessibility considerations to ensure usability for all
+users.
+"""
+type UIProductOverview {
+  id: ID!
+  productID: ID!
+  heading: UIHeading!
+  rating: UIRating!
+  summary: String!
+  reviewsSummary: UIReviewsSummary!
+  productFeaturesIconGroup: UIIconTextGroup!
+  map: UIMap!
+  similarLocationsIconGroup: UIIconTextGroup!
+}
+
+"""
+Error
+
+Represents an error state in the UI, providing information about what went
+wrong.  Includes a message and potentially other fields like an error code.
+"""
+type UIError {
+  message: String!
+  code: String
+  ariaLabel: String
+}
+
+"""
+Union for Product Overview or Error
+
+Represents either a successful product overview or an error state.
+"""
+union ProductOverviewResult = UIProductOverview | UIError

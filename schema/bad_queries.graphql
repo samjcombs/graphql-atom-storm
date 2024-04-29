@@ -1,0 +1,56 @@
+query HotelInfo($id: ID!) {
+  hotelInfo(id: $id) {
+    name
+    guestRating
+    numberOfReviews
+    isRefundable
+    amenities {
+      icon
+      description
+    }
+    location {
+      fullAddress
+      attractionsNearby
+      mapLink
+    }
+  }
+}
+
+query VacationPackage($id: ID!) {
+  vacationPackage(id: $id) {
+    name
+    rating
+    totalReviews
+    canBeRefunded
+    includedAmenities {
+      icon
+      description
+    }
+    location {
+      fullAddress
+      attractionsNearby
+      mapLink
+    }
+  }
+}
+
+query AdventureActivity($id: ID!) {
+  adventureActivity(id: $id) {
+    title
+    rating
+    reviewCount
+    price
+    allowsRefunds
+    features {
+      policy
+      timeLength
+      supportsMobileVoucher
+      providesInstantConfirmation
+    }
+    details
+    spot {
+      fullAddress
+      mapLink
+    }
+  }
+}
