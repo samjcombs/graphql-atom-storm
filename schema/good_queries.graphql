@@ -8,13 +8,23 @@ fragment Rating on UIRating {
   ariaLabel
 }
 
+fragment Link on UILink {
+  text
+  icon
+  iconPosition
+  URI
+  analytics {
+    referrId
+    linkName
+    eventType
+  }
+}
+
 fragment Icon on UIIcon {
   name
   text
   ariaLabel
   ariaHidden
-  altText
-  accessKey
 }
 
 fragment Map on UIMap {
@@ -22,7 +32,6 @@ fragment Map on UIMap {
   address
   ariaLabel
   ariaLive
-  lang
 }
 
 fragment IconTextGroup on UIIconTextGroup {
@@ -51,6 +60,7 @@ fragment ProductOverview on UIProductOverview {
   }
   rating {
     ...Rating
+    ...Link
   }
   summary
   reviewsSummary {
@@ -58,12 +68,15 @@ fragment ProductOverview on UIProductOverview {
   }
   productFeaturesIconGroup {
     ...IconTextGroup
+    ...Link
   }
   map {
     ...Map
+    ...Link
   }
   similarLocationsIconGroup {
     ...IconTextGroup
+    ...Link
   }
 }
 
