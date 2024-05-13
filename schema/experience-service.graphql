@@ -117,8 +117,6 @@ experience, with accessibility considerations to ensure usability for all
 users.
 """
 type UIProductOverview {
-  id: ID!
-  productID: ID!
   heading: UIHeading!
   rating: UIRating!
   summary: String!
@@ -137,7 +135,6 @@ wrong.  Includes a message and potentially other fields like an error code.
 type UIError {
   message: String!
   code: String
-  ariaLabel: String
 }
 
 """
