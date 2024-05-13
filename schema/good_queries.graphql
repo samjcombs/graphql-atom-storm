@@ -53,8 +53,7 @@ fragment ReviewsSummary on UIReviewsSummary {
   ariaLive
 }
 
-fragment ProductOverview on UIProductOverview {
-  productID
+type UIProductOverview {
   heading {
     ...Heading
   }
@@ -83,12 +82,11 @@ fragment ProductOverview on UIProductOverview {
 query GetProductOverview($productID: ID!) {
   productOverviewExperience(productID: $productID) {
     ... on UIProductOverview {
-      ...ProductOverview
+      ... all of them
     }
     ... on UIError {
       message
       code
-      ariaLabel
     }
   }
 }
