@@ -10,11 +10,13 @@ fragment Rating on UIRating {
 
 fragment Link on UILink {
   text
-  icon
+  icon {
+    id
+  }
   iconPosition
-  URI
+  uri
   analytics {
-    referrId
+    referrerId
     linkName
     eventType
   }
@@ -60,7 +62,6 @@ fragment ProductOverview on UIProductOverview {
   }
   rating {
     ...Rating
-    ...Link
   }
   summary
   reviewsSummary {
@@ -68,15 +69,12 @@ fragment ProductOverview on UIProductOverview {
   }
   productFeaturesIconGroup {
     ...IconTextGroup
-    ...Link
   }
   map {
     ...Map
-    ...Link
   }
   similarLocationsIconGroup {
     ...IconTextGroup
-    ...Link
   }
 }
 

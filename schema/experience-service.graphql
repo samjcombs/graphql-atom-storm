@@ -1,4 +1,10 @@
 # Product Experience Service
+scalar FieldSet
+
+directive @key(
+  fields: FieldSet!
+  resolvable: Boolean = true
+) repeatable on OBJECT | INTERFACE
 
 """
 Experience queries
@@ -12,12 +18,63 @@ type Query {
   productOverviewExperience(productID: ID!): ProductOverviewResult!
 }
 
-#   Atomic Component Library
+# Atomic Component Library
 
 """
 Geospatial Coordinate
 """
 scalar LatLng
+
+"""
+URL
+"""
+scalar URL
+
+"""
+Atomic Component: Icon with text
+
+Represents a UI icon component accompanied by text, used to
+visually represent features or actions.  Includes accessibility
+enhancements.
+"""
+type UIIconWithText @key(fields: "id") {
+  id: ID!
+  glyphName: String!
+  text: String!
+  glyphAltText: String!
+  size: String!
+  ariaString: String!
+}
+
+enum IconPosition {
+  LEADING
+  TRAILING
+}
+
+enum AnalyticEventType {
+  CLICK
+  IMPRESSION
+}
+
+type ClientAnalytics {
+  referrerId: String!
+  linkName: String!
+  eventType: AnalyticEventType!
+}
+
+"""
+Atomic Component: Link with icon
+
+A configurable link with accompanying icon that allows for adjustable poistion.
+Optional analytics fields are included according to org-wide standards.
+"""
+type UILinkWithIcon {
+  text: String!
+  icon: UIIcon!
+  iconPosition: IconPosition!
+  uri: URL!
+  analytics: ClientAnalytics!
+}
 
 """
 Atomic Component: Heading
@@ -42,23 +99,7 @@ type UIRating {
   id: ID!
   rating: Float!
   ariaLabel: String
-}
-
-"""
-Atomic Component: Icon
-
-Represents a UI icon component, optionally accompanied by text, used to
-visually represent features or actions.  Includes accessibility
-enhancements.
-"""
-type UIIcon {
-  id: ID!
-  name: String!
-  text: String
-  ariaLabel: String
-  ariaHidden: Boolean
-  altText: String
-  accessKey: String
+  link: UILink
 }
 
 """
@@ -110,14 +151,10 @@ type UIReviewsSummary {
 Pattern Component: Product Overview
 
 A comprehensive UI component representing a product overview. It includes a
-heading, a rating summary, and various sub-components that provide detailed
-information about the product and related features. This component integrates
-various pattern sub-components and atomic elements to form a cohesive user
-experience, with accessibility considerations to ensure usability for all
-users.
+heading, a rating summary, and various sub-components, including accessibility
+considerations.
 """
 type UIProductOverview {
-  id: ID!
   productID: ID!
   heading: UIHeading!
   rating: UIRating!
